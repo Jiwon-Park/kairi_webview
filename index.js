@@ -25,7 +25,7 @@ app.get('/live2d_resource/:card_id-body.model.json', (req, res) => {
     let card_id = req.params['card_id']
     let cap_card_id = ""
     if (card_id.startsWith('card')) {
-        cap_card_id = card_id.charAt(0).toUpperCase + card_id.slice(1);
+        cap_card_id = card_id.charAt(0).toUpperCase() + card_id.slice(1);
     } else {
         cap_card_id = card_id;
     }
