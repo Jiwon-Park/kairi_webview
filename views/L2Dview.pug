@@ -1,0 +1,15 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        script(src="../js/live2d.min.js") 
+        title Live2DViewer
+    body 
+        canvas(id="live2d" width="1024" height="768")
+        input(type="hidden", id="card_id", value= card_id)
+        script.
+            let card_id = document.getElementById("card_id").value;
+            let url = "/live2d_resource/" + card_id + "-body.model.json";
+            loadlive2d("live2d", url)
