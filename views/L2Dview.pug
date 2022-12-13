@@ -10,7 +10,22 @@ html(lang="en")
     body 
         canvas(id="live2d" width="1024" height="768")
         input(type="hidden", id="card_id", value= card_id)
+        input(type="range", value="1", min="1", max="5", step="0.01", id="scale_slider", name="slider", aria-label="Zoom")
         script.
+            var l2d_scale = 1.0;
+            let slider = document.getElementById("scale_slider");
+            let canvas = document.getElementById("live2d");
+            slider.oninput = function() {
+                l2d_scale = parseFloat(this.value);
+            };
             let card_id = document.getElementById("card_id").value;
             let url = "/live2d_resource/" + card_id + "-body.model.json";
-            loadlive2d("live2d", url)
+            let layout = {
+                height: "1.5",
+                center_x: "0",
+                center_y: "0"
+            }
+            loadlive2d("live2d", url);
+            sessionStorage.setItem("Sleepy", "0");
+            if(card_id.startsWith("card_"))
+                window.removeEventListener("mousemove", l2dmouseevent)
