@@ -1,4 +1,5 @@
-resources/
+resources/cardimg/
+resources/live2d_resource/
 resources.zip
 # Logs
 logs
