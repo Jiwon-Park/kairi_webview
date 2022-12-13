@@ -1,45 +1,17 @@
 doctype html
-html(lang="en" style="background-color: black;")
+html(lang="ja")
     head
         meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         script(src="https://unpkg.com/json5@2/dist/index.min.js")
         script(src="../js/live2d.min.js") 
+        link(rel="stylesheet", href="../css/l2dview.css")
         title Live2DViewer
     body 
-        canvas(id="live2d" width="1200" height="1200" style="float:left;")
+        canvas(id="live2d" width="1200" height="1200")
         input(type="hidden", id="card_id", value= card_id)
-        div(style="margin-top:480px;vertical-align:top;float:left;text-align:center;")
-            label(for="slider" style="color:white;")="Zoom"
-            input(type="range", value="1", min="0.1", max="5", step="0.01", id="scale_slider", name="slider", aria-label="Zoom", orient="vertical" style="-webkit-appearance:slider-vertical;height:600px;display:block;margin-top:20px")
-        script.
-            var l2d_scale = 1.0, l2d_x = 0.0, l2d_y = 0.0;
-            let tmp_x = 0.0, tmp_y = 0.0;
-            let start = null, delta = null;
-            let slider = document.getElementById("scale_slider");
-            let canvas = document.getElementById("live2d");
-            slider.oninput = function() {
-                l2d_scale = parseFloat(this.value);
-            };
-            canvas.addEventListener('mousedown', e => {
-                start = {x: e.clientX, y: e.clientY};
-            })
-            canvas.addEventListener('mousemove', e => {
-                if(start !== null) {
-                    delta = {x: e.clientX - start.x, y: e.clientY - start.y}
-                    l2d_x = tmp_x + (delta.x / 600);
-                    l2d_y = tmp_y - (delta.y / 600);
-                }
-            })
-            canvas.addEventListener('mouseup', e => {
-                tmp_x = l2d_x;
-                tmp_y = l2d_y;
-                start = delta = null;
-            })
-            let card_id = document.getElementById("card_id").value;
-            let url = "/live2d_resource/" + card_id + "-body.model.json";
-            loadlive2d("live2d", url);
-            sessionStorage.setItem("Sleepy", "0");
-            if(card_id.startsWith("card_"))
-                window.removeEventListener("mousemove", l2dmouseevent)
+        div
+            label(for="slider") Zoom
+            input(type="range", value="1", min="0.1", max="5", step="0.01", id="scale_slider", name="slider", aria-label="Zoom", orient="vertical")
+        script(src="../js/l2dcontrol.js")
+            
