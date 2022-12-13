@@ -1,8 +1,26 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 5000
+let port
 
+if(process.argv.length > 2) {
+    let nextisport = false;
+    for (const key in process.argv) {
+        if (Object.hasOwnProperty.call(process.argv, key)) {
+            const element = process.argv[key];
+            if (nextisport) {
+                port = parseInt(element);
+                break;
+            }
+            if (element === "-p" || element === "--port") {
+                nextisport = true;
+            }
+        }
+    }
+}
+if(typeof port === 'undefined'){
+    port = 5000;
+}
 
 app.set('view engine', 'pug');
 app.use(express.static('resources'))
