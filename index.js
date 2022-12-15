@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
+const controllers = require('./src/controllers/controller')
 const app = express();
+
+
 let port
 
 if(process.argv.length > 2) {
@@ -18,6 +21,7 @@ if(process.argv.length > 2) {
         }
     }
 }
+
 if(typeof port === 'undefined'){
     port = 5000;
 }
@@ -29,31 +33,16 @@ app.get('/', (req, res) => {
     res.send('hello world');
 })
 
-app.get('/L2Dview/:card_id', (req, res) => {
-    let card_id = req.params['card_id']
-    res.render('L2Dview', {card_id: card_id})
-})
+app.get('/L2Dview/:card_id', controllers.l2dview)
 
-app.get('/Imgview/:card_id', (req, res) => {
-    let card_id = req.params['card_id']
-    res.render('Imgview', {card_id: card_id})
-})
+app.get('/Cardview/:card_id', controllers.cardview)
 
-app.get('/live2d_resource/:card_id-body.model.json', (req, res) => {
-    let card_id = req.params['card_id']
-    let cap_card_id = ""
-    if (card_id.startsWith('card')) {
-        cap_card_id = card_id.charAt(0).toUpperCase() + card_id.slice(1);
-    } else {
-        cap_card_id = card_id;
-    }
-    res.sendFile(`/live2d_resource/Live2D/${cap_card_id}/body.model.json`, {root: './resources'})
-})
+app.get('/live2d_resource/:card_id-body.model.json', controllers.l2d_body_model)
 
-app.get('/resources/*', (req, res) => {
-    console.log(req.params[0])
-    res.sendFile(req.params[0])
-})
+// app.get('/resources/*', (req, res) => {
+//     console.log(req.params[0])
+//     res.sendFile(req.params[0])
+// })
 
 app.listen(port, () => {
     console.log(`app listening on port ${port}`)

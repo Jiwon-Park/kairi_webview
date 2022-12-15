@@ -4,7 +4,10 @@
   "description": "kairisei million arthur live2d viewer",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:win32": "node index.js",
+    "start:aws": "sudo setsid nohup node index.js",
+    "getpid": "sudo ps -u root | grep node"
   },
   "author": "wldnjs1323@naver.com",
   "license": "ISC",
