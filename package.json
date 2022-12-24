@@ -1,20 +1,25 @@
 {
-  "name": "kairi_webview",
-  "version": "1.0.0",
+  "name": "kairi-webview",
+  "version": "0.0.1",
   "description": "kairisei million arthur live2d viewer",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start:win": "node index.js",
-    "start:aws": "sudo setsid nohup node index.js",
+    "start": "nodemon ./bin/www",
+    "start:aws": "sudo setsid nohup node ./bin/www",
     "getpid": "sudo ps -u root | grep node"
   },
   "author": "wldnjs1323@naver.com",
-  "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.231.0",
     "@aws-sdk/util-dynamodb": "^3.231.0",
+    "bootstrap": "^5.2.3",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.4",
+    "debug": "^2.6.9",
     "express": "^4.18.2",
+    "express-asyncify": "^1.1.0",
+    "http-errors": "^1.6.3",
+    "morgan": "^1.9.1",
     "pug": "^3.0.2"
   }
 }
