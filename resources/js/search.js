@@ -48,7 +48,7 @@ async function fillDL() {
             }
         }
         if(keyarr.length > 0){
-            if(keyarr.length > 30)keyarr = keyarr.slice(0, 30);
+            if(keyarr.length > 50)keyarr = keyarr.slice(0, 50);
             makecard(keyarr)
         }
     })
