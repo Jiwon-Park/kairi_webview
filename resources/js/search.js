@@ -14,6 +14,7 @@ async function fillDL() {
     });
     input.appendChild(dl)
     input.addEventListener('input', async function(e) {
+        if(this.value.length < 2)return
         let arr = []
         val.forEach((e, i) => {
             let searched = [...this.value].every(x => {
@@ -46,7 +47,10 @@ async function fillDL() {
                 }
             }
         }
-        if(keyarr.length > 0)makecard(keyarr)
+        if(keyarr.length > 0){
+            if(keyarr.length > 30)keyarr = keyarr.slice(0, 30);
+            makecard(keyarr)
+        }
     })
 }
 
