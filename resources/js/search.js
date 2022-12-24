@@ -112,3 +112,10 @@ makecard([
     {key: "10274003", value: "[騎士]感謝型コンスタンティン"},
     {key: "10274007", value: "[騎士]感謝型オイフェ"}
 ])
+
+window.addEventListener('keydown', function(event){
+    if(event.key === 'Enter') {
+      event.preventDefault();
+      return false;
+    }
+});
