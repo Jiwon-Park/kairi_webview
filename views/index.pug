@@ -58,21 +58,12 @@ block content
           svg.me-2(xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true' viewbox='0 0 24 24')
             path(d='M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z')
             circle(cx='12' cy='13' r='4')
-          strong Album
+          strong MA-Album
         form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3.form-search
           input.form-control.form-control-dark#search(type='search' placeholder='Search...' aria-label='Search' list='data-search')
         button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarHeader' aria-controls='navbarHeader' aria-expanded='false' aria-label='Toggle navigation')
           span.navbar-toggler-icon
   main
-    section.py-5.text-center.container
-      .row.py-lg-5
-        .col-lg-6.col-md-8.mx-auto
-          h1.fw-light Album example
-          p.lead.text-muted
-            | Something short and leading about the collection below&mdash;its contents, the creator, etc. Make it short and sweet, but not too short so folks don&rsquo;t simply skip over it entirely.
-          p
-            a.btn.btn-primary.my-2(href='#') Main call to action
-            a.btn.btn-secondary.my-2(href='#') Secondary action
     .album.py-5.bg-light
       .container
         .row.row-cols-1.row-cols-sm-2.row-cols-md-3.g-3
@@ -213,4 +204,4 @@ block content
         |  or read our 
         a(href='/docs/5.0/getting-started/introduction/') getting started guide
         | .
-  script(src="/js/make_datalist.js") 
+  script(src="/js/search.js") 
