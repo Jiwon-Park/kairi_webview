@@ -47,6 +47,24 @@ async function fillDL() {
                 }
             }
         }
+        for (const key in json_buddy) {
+            if (Object.hasOwnProperty.call(json_buddy, key)) {
+                const element = json_buddy[key];
+                let fidx = -1
+                arr.forEach((v, i) => {
+                    if (element === v) {
+                        keyarr.push({key: key, value: element})
+                        fidx = i
+                    }
+                })
+                if (fidx != -1) {
+                    arr.splice(fidx, 1)
+                }
+                if (arr.length == 0) {
+                    break
+                }
+            }
+        }
         if(keyarr.length > 0){
             if(keyarr.length > 50)keyarr = keyarr.slice(0, 50);
             makecard(keyarr)
