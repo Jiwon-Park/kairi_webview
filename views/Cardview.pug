@@ -10,5 +10,10 @@ html(lang="en")
         else 
             img(src=`/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp`)
         each val, key in card_data
-            h3=key 
-            p=val 
+            if key !== 'script'
+                h3=key 
+                p=val 
+            else 
+                h3=key
+                each script in val 
+                    p=script 
