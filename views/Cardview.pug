@@ -14,7 +14,7 @@ html(lang="en")
                 continue
             else if key !== 'script'
                 h3=key 
-                p=val 
+                p=val.replaceAll('<br>', '') 
             else 
                 h3=key
                 each script of val 
