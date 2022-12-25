@@ -80,7 +80,7 @@ function makecard(keyarr) {
         let card = document.createElement('template')
         let imgsrc
         if(e.key.startsWith('b')){
-            imgsrc = '/cardimg/thumbnails/buddy/'+e.key.substr(1)+e.value+'.png'
+            imgsrc = '/cardimg/thumbnails/buddy/'+e.key.substr(1)+e.value+'.webp'
         } else {
             imgsrc = '/cardimg/thumbnails/'+e.key+e.value+'.webp'
         }
