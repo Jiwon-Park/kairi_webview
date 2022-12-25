@@ -9,5 +9,6 @@ html(lang="en")
             img(src=`/cardimg/buddy/${card_id.substr(1)}.png`)
         else 
             img(src=`/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp`)
-        p=card_id 
-        p=card_data 
+        each val, key in card_data
+            h3=key 
+            p=val 
