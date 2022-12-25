@@ -5,3 +5,9 @@ html(lang="en")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Imgview
     body 
+        if card_id.startsWith('b')
+            img(src=`/cardimg/buddy/${card_id.substr(1)}.png`)
+        else 
+            img(src=`/cardimg/${card_id+card_data.card_name}.webp`)
+        p=card_id 
+        p=card_data 
