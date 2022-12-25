@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "start:aws": "sudo -E setsid nohup node ./bin/www &",
+    "start:aws": "sudo PORT=80 setsid nohup node ./bin/www &",
     "getpid": "sudo ps -u root | grep node"
   },
   "author": "wldnjs1323@naver.com",
