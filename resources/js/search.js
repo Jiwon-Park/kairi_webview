@@ -80,14 +80,14 @@ function makecard(keyarr) {
         let card = document.createElement('template')
         let imgsrc
         if(e.key.startsWith('b')){
-            imgsrc = '/cardimg/buddy/'+e.key.substr(1)+e.value+'.png'
+            imgsrc = '/cardimg/thumbnails/buddy/'+e.key.substr(1)+e.value+'.png'
         } else {
-            imgsrc = '/cardimg/'+e.key+e.value+'.webp'
+            imgsrc = '/cardimg/thumbnails/'+e.key+e.value+'.webp'
         }
         console.log(imgsrc)
         let inner = `<a href="/Cardview/${e.key}"><div class="col">
             <div class="card shadow-sm">
-            <img src="${imgsrc}"></img>
+            <img src="${imgsrc}" alt="Error"></img>
             <div class="card-body">
                 <p class="card-text">${e.value}</p>
             </div>
