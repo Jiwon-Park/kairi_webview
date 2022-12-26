@@ -1,13 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const { getitem } = require("../services/DynamoDBService");
-
+const slowDown = require('express-slow-down')
+const speed_limit = slowDown({
+    windowMs: 1 * 60 * 1000,
+    delayAfter: 5,
+    delayMs: 1000
+})
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/L2Dview/:card_id', async (req, res, next) => {
+router.get('/L2Dview/:card_id', speed_limit, async (req, res, next) => {
     try {
 	    let card_id = req.params['card_id']
 	    res.render('L2Dview', {card_id: card_id})
@@ -35,6 +40,11 @@ router.get('/live2d_resource/:card_id-body.model.json', async (req, res, next) =
     } catch (error) {
         next(error)
     }
+})
+
+router.get('/live2d_resource/Live2D/:card_id/moc/*', speed_limit, function (req, res, next) {
+//   console.log(req.url)
+  next()
 })
 
 router.get('/error', async (req, res, next) => {
