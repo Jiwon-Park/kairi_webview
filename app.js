@@ -34,6 +34,7 @@ app.use('/vendor', vendorRouter);
 app.use(express.static(path.join(__dirname, 'resources/static')));
 app.use('/thumbnails', express.static(path.join(__dirname, 'resources/thumbnails')))
 app.use('/live2d_resource', express.static(path.join(__dirname, 'resources/live2d_resource')))
+app.use('/favicon.ico', express.static(path.join(__dirname, 'resources/favicon.ico')))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
