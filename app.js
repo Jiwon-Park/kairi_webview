@@ -31,7 +31,15 @@ app.use(cookieParser());
 app.use(compression());
 
 app.use(function (req, res, next) {
-  res.set('cache-control', 'max-age=300')
+  if (req.url.endsWith("webp") || req.url.endsWith("json") || req.url.endsWith("png") || req.url.endsWith("moc") || req.url.endsWith("mtn")) {
+    res.set('cache-control', 'max-age=31536000');
+  }
+  else if (req.url.endsWith("js") || req.url.endsWith("css")) {
+    res.set('cache-control', 'max-age=300');
+  }
+  else {
+    res.set('cache-control', 'no-cache');
+  }
   next()
 });
 
