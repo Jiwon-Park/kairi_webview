@@ -18,14 +18,22 @@ var app = asyncify(express());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.disable('x-powered-by')
+app.disable('x-powered-by');
 
-app.use(helmet())
+app.use(helmet({
+  referrerPolicy: {policy: "no-referrer"},
+  frameguard: false
+}));
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(compression())
+app.use(compression());
+
+app.use(function (req, res, next) {
+  res.set('cache-control', 'max-age=300')
+  next()
+});
 
 app.use('/', indexRouter);
 app.use('/cardimg', filesRouter);
