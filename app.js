@@ -22,7 +22,9 @@ app.disable('x-powered-by');
 
 app.use(helmet({
   referrerPolicy: {policy: "no-referrer"},
-  frameguard: false
+  frameguard: false,
+  xssFilter: false,
+  contentSecurityPolicy: false,
 }));
 app.use(logger('dev'));
 app.use(express.json());
