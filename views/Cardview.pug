@@ -6,9 +6,9 @@ html(lang="en")
         title Imgview
     body 
         if card_id.startsWith('b')
-            img(src=`"/cardimg/buddy/${card_id.substr(1)}.png" alt="Error"`)
+            img(src=`/cardimg/buddy/${card_id.substr(1)}.png` alt="Error")
         else 
-            img(src=`"/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp" alt="Error"`)
+            img(src=`/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp` alt="Error")
         each val, key in card_data
             if key.endsWith('1')
                 continue
