@@ -1,21 +1,74 @@
-doctype html
-html(lang="en")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title Imgview
-    body 
-        if card_id.startsWith('b')
-            img(src=`/cardimg/buddy/${card_id.substr(1)}.png` alt="Error")
-        else 
-            img(src=`/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp` alt="Error")
-        each val, key in card_data
-            if key.endsWith('1')
-                continue
-            else if key !== 'script'
-                h3=key 
-                p=val.replaceAll('<br>', '') 
-            else 
-                h3=key
-                each script of val 
-                    p=script.replaceAll('<br>', '') 
+extends layout
+block head
+    title=card_data.card_name
+    style. 
+        th[colspan] {
+            text-align: center;
+        }
+        td[colspan] {
+            text-align: center;
+        }
+        .row {
+            align-items: center;
+        }
+        @media(min-width: 1680px) {
+            .container {
+                max-width: 1560px;
+            }
+        }
+block content 
+    .container.py-4
+        .row
+            .col-lg-6
+                if card_id.startsWith('b')
+                    img.img-fluid(src=`/cardimg/buddy/${card_id.substr(1)}.png` alt="Error")
+                else 
+                    img.img-fluid(src=`/cardimg/${card_id+'['+card_data.prefix+']'+card_data.card_name}.webp` alt="Error")
+            .col-lg-6
+                table.table.table-hover
+                    tbody 
+                        tr 
+                            th(scope="row" class="table-primary") カード名
+                            td="【" + card_data.prefix + "】" + card_data.card_name
+                        tr
+                            th(scope="row" class="table-primary") イラスト
+                            td=card_data.illustrator 
+                        tr
+                            th(scope="row" class="table-primary") CV
+                            td=card_data.cv 
+                        
+                        tr
+                            th(scope="row" class="table-primary") 性別
+                            td=card_data.gender 
+                        tr
+                            th(scope="row" class="table-primary") 身長
+                            td=card_data.height 
+                        tr
+                            th(scope="row" class="table-primary") 体重
+                            td=card_data.weight 
+                        tr
+                            th(scope="row" class="table-primary") スリーサイズ
+                            td=card_data.threesize 
+                        tr
+                            th(scope="row" class="table-primary") 利き手
+                            td=card_data.handedness 
+                        tr(scope="row" class="table-primary")
+                            th(colspan="2") 騎士カード情報
+                        tr
+                            td(colspan="2")=card_data.card_info.replaceAll('<br>', '\n') 
+                        tr(scope="row" class="table-primary")
+                            th(colspan="2") スクリプト
+                        each script of card_data.script 
+                            tr
+                                td(colspan="2")=script.replaceAll('<br>', '') 
+    //- table(class="table table-hover")
+    //-     tbody
+    //-         each val, key in card_data
+    //-             if key.endsWith('1')
+    //-                 continue
+    //-             else if key !== 'script'
+    //-                 tr 
+    //-                     th(scope="row" class="table-primary")=key 
+    //-                     td=val.replaceAll('<br>', '') 
+    //-             else 
+                    
