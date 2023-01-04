@@ -55,7 +55,7 @@ block content
                         tr(scope="row" class="table-primary")
                             th(colspan="2") 騎士カード情報
                         tr
-                            td(colspan="2")=card_data.card_info.replaceAll('<br>', '\n') 
+                            td(colspan="2")=card_data.card_info.replaceAll('<br>', '') 
                         tr(scope="row" class="table-primary")
                             th(colspan="2") スクリプト
                         each script of card_data.script 
