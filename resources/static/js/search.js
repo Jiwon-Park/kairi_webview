@@ -1,10 +1,14 @@
+let val = []
+let json_card = {}
+let json_buddy = {}
+
 async function fillDL() {
-    var json_card = await fetch('../json/card_data.json').then(e => e.json())
-    var json_buddy = await fetch('../json/buddy_data.json').then(e => e.json())
+    json_card = await fetch('../json/card_data.json').then(e => e.json())
+    json_buddy = await fetch('../json/buddy_data.json').then(e => e.json())
     let input = document.getElementById('search')
     let val1 = Object.values(json_card)
     let val2 = Object.values(json_buddy)
-    let val = val1.concat(val2)
+    val = val1.concat(val2)
     let dl = document.createElement('datalist')
     dl.id = 'data-search'
     val.forEach(e => {
@@ -14,10 +18,11 @@ async function fillDL() {
     });
     input.appendChild(dl)
     input.addEventListener('input', search)
+    input.dispatchEvent(new Event('input'))
 }
 
 async function search() {
-    if(this.value.length < 2)return
+    if(this.value.length < 1)return
     let arr = []
     val.forEach((e, i) => {
         let searched = [...this.value].every(x => {
@@ -121,5 +126,3 @@ window.addEventListener('keydown', function(event){
       return false;
     }
 });
-
-search()
