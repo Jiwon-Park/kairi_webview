@@ -25,6 +25,8 @@ app.use(helmet({
   frameguard: false,
   xssFilter: false,
   contentSecurityPolicy: false,
+  crossOriginResourcePolicy: {policy: "cross-origin"},
+  crossOriginEmbedderPolicy: false,
 }));
 app.use(logger('dev'));
 app.use(express.json());

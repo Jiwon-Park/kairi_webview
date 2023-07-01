@@ -1,10 +1,14 @@
+let val = []
+let json_card = {}
+let json_buddy = {}
+
 async function fillDL() {
-    var json_card = await fetch('../json/card_data.json').then(e => e.json())
-    var json_buddy = await fetch('../json/buddy_data.json').then(e => e.json())
+    json_card = await fetch('../json/card_data.json').then(e => e.json())
+    json_buddy = await fetch('../json/buddy_data.json').then(e => e.json())
     let input = document.getElementById('search')
     let val1 = Object.values(json_card)
     let val2 = Object.values(json_buddy)
-    let val = val1.concat(val2)
+    val = val1.concat(val2)
     let dl = document.createElement('datalist')
     dl.id = 'data-search'
     val.forEach(e => {
@@ -13,63 +17,66 @@ async function fillDL() {
         dl.appendChild(option)
     });
     input.appendChild(dl)
-    input.addEventListener('input', async function(e) {
-        if(this.value.length < 2)return
-        let arr = []
-        val.forEach((e, i) => {
-            let searched = [...this.value].every(x => {
-                let ea = [...e]
-                let idx = ea.indexOf(x)
-                if(~idx){
-                    ea.splice(idx, 1);
-                    return true;
+    input.addEventListener('input', search)
+    input.dispatchEvent(new Event('input'))
+}
+
+async function search() {
+    if(this.value.length < 1)return
+    let arr = []
+    val.forEach((e, i) => {
+        let searched = [...this.value].every(x => {
+            let ea = [...e]
+            let idx = ea.indexOf(x)
+            if(~idx){
+                ea.splice(idx, 1);
+                return true;
+            }
+        })
+        if (searched) arr.push(val[i])
+    })
+    let keyarr = []
+
+    for (const key in json_card) {
+        if (Object.hasOwnProperty.call(json_card, key)) {
+            const element = json_card[key];
+            let fidx = -1
+            arr.forEach((v, i) => {
+                if (element === v) {
+                    keyarr.push({key: key, value: element})
+                    fidx = i
                 }
             })
-            if (searched) arr.push(val[i])
-        })
-        let keyarr = []
-    
-        for (const key in json_card) {
-            if (Object.hasOwnProperty.call(json_card, key)) {
-                const element = json_card[key];
-                let fidx = -1
-                arr.forEach((v, i) => {
-                    if (element === v) {
-                        keyarr.push({key: key, value: element})
-                        fidx = i
-                    }
-                })
-                if (fidx != -1) {
-                    arr.splice(fidx, 1)
-                }
-                if (arr.length == 0) {
-                    break
-                }
+            if (fidx != -1) {
+                arr.splice(fidx, 1)
+            }
+            if (arr.length == 0) {
+                break
             }
         }
-        for (const key in json_buddy) {
-            if (Object.hasOwnProperty.call(json_buddy, key)) {
-                const element = json_buddy[key];
-                let fidx = -1
-                arr.forEach((v, i) => {
-                    if (element === v) {
-                        keyarr.push({key: key, value: element})
-                        fidx = i
-                    }
-                })
-                if (fidx != -1) {
-                    arr.splice(fidx, 1)
+    }
+    for (const key in json_buddy) {
+        if (Object.hasOwnProperty.call(json_buddy, key)) {
+            const element = json_buddy[key];
+            let fidx = -1
+            arr.forEach((v, i) => {
+                if (element === v) {
+                    keyarr.push({key: key, value: element})
+                    fidx = i
                 }
-                if (arr.length == 0) {
-                    break
-                }
+            })
+            if (fidx != -1) {
+                arr.splice(fidx, 1)
+            }
+            if (arr.length == 0) {
+                break
             }
         }
-        if(keyarr.length > 0){
-            if(keyarr.length > 50)keyarr = keyarr.slice(0, 50);
-            makecard(keyarr)
-        }
-    })
+    }
+    if(keyarr.length > 0){
+        if(keyarr.length > 50)keyarr = keyarr.slice(0, 50);
+        makecard(keyarr)
+    }
 }
 
 function makecard(keyarr) {
