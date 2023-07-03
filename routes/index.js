@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+const router = express.Router();
 const { getitem } = require("../services/DynamoDBService");
 const slowDown = require('express-slow-down')
 const speed_limit = slowDown({
@@ -32,10 +32,11 @@ router.get('/Cardview/:card_id', async (req, res, next) => {
     }
 })
 
-router.get('/live2d_resource/:card_id-body.model.json', async (req, res, next) => {
+router.get('/live2d_resource/:card_id', async (req, res, next) => {
     try {
 	    let card_id = req.params['card_id']
 	    let cap_card_id = card_id.startsWith('card') ? card_id[0].toUpperCase() + card_id.slice(1) : card_id
+        console.log(cap_card_id)
 	    res.sendFile(`/live2d_resource/Live2D/${cap_card_id}/body.model.json`, {root: './resources'})
     } catch (error) {
         next(error)

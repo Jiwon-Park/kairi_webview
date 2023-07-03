@@ -7,6 +7,7 @@ const compression = require('compression');
 const asyncify = require('express-asyncify')
 const helmet = require('helmet')
 const {STATUS_CODES} = require('http')
+const qs = require('qs')
 
 var indexRouter = require('./routes/index');
 var filesRouter = require('./routes/files');
@@ -17,6 +18,8 @@ var app = asyncify(express());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+app.set('query parser', 'extended');
+
 
 app.disable('x-powered-by');
 

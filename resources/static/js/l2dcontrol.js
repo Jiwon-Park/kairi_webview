@@ -25,7 +25,7 @@ document.getElementsByTagName('button')[0].addEventListener('click', e => {
     l2d_x = l2d_y = tmp_x = tmp_y = 0;
 })
 let card_id = document.getElementById("card_id").value;
-let url = "/live2d_resource/" + card_id + "-body.model.json";
+let url = "/live2d_resource/" + card_id;
 loadlive2d("live2d", url);
 sessionStorage.setItem("Sleepy", "0");
 if(card_id.startsWith("card_"))
