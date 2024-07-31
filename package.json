@@ -10,7 +10,7 @@
   },
   "author": "wldnjs1323@naver.com",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.231.0",
+    "@aws-sdk/client-dynamodb": "^3.621.0",
     "@aws-sdk/util-dynamodb": "^3.231.0",
     "bootstrap": "^5.2.3",
     "compression": "^1.7.4",
